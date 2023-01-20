@@ -8,7 +8,6 @@ public final class App {
 
     public static void main(String[] args) {
 
-        String[] choice = {"scissors", "paper", "stone"};
         Integer computerChoice, playerChoice;
         String winner = "";
 
