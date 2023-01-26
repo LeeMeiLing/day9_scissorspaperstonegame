@@ -1,6 +1,8 @@
 package sg.edu.nus.iss;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public final class App {
     private App() {
@@ -8,7 +10,7 @@ public final class App {
 
     public static void main(String[] args) {
 
-        Integer computerChoice, playerChoice;
+        Integer computerChoice, playerChoice = 0;
         String winner = "";
 
         Scanner scanner= new Scanner(System.in);
@@ -19,9 +21,19 @@ public final class App {
         while(winner.equals("")){
 
             System.out.println("Enter (1)Scissors, (2) Paper, or (3) Stone: ");
-            playerChoice = scanner.nextInt();
+            
+            try{
 
-            if(!(playerChoice >= 1) && (playerChoice<=3)){
+                playerChoice = scanner.nextInt();
+
+            }catch(InputMismatchException e){
+
+                System.out.println("Invalid input: Only number 1, 2 or 3 is allowed");
+                scanner.skip(Pattern.compile(".*")); /// must have this line, else the char will stay in scanner and cannot complete scanner.nextInt
+                continue;
+            }
+
+            if(!((playerChoice >= 1) && (playerChoice<=3))){
                 System.out.println("Invalid input: Only number 1, 2 or 3 is allowed");
                 continue;
             }
